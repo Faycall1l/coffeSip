@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Temperature Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="coffee-steam">
+                <div class="steam steam1"></div>
+                <div class="steam steam2"></div>
+                <div class="steam steam3"></div>
+            </div>
+            <h1>Coffee Temperature Tracker</h1>
+            <p class="subtitle">Newton's Law of Cooling Simulation</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Panel - Controls -->
+            <div class="left-panel">
+                <!-- Mug Selection -->
+                <div class="section mug-selection">
+                    <h2>Choose Your Mug</h2>
+                    <div class="mug-grid">
+                        {% for mug_id, mug_data in mug_types.items() %}
+                        <div class="mug-option" data-mug="{{ mug_id }}">
+                            <div class="mug-visual" style="background: linear-gradient(135deg, {{ mug_data.color }}, {{ mug_data.color }}88);"></div>
+                            <div class="mug-info">
+                                <h3>{{ mug_data.name }}</h3>
+                                <p class="mug-desc">{{ mug_data.description }}</p>
+                                <div class="mug-stats">
+                                    <span class="cooling-rate">k = {{ mug_data.cooling_constant }}</span>
+                                    <span class="thermal-mass">{{ mug_data.thermal_mass }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Parameters -->
+                <div class="section parameters">
+                    <h2>Temperature Parameters</h2>
+                    <div class="param-grid">
+                        <div class="param-group">
+                            <label for="coffee-temp">Coffee Temperature</label>
+                            <div class="input-group">
+                                <input type="number" id="coffee-temp" value="85" min="60" max="100">
+                                <span class="unit">°C</span>
+                            </div>
+                        </div>
+                        
+                        <div class="param-group">
+                            <label for="room-temp">Room Temperature</label>
+                            <div class="input-group">
+                                <input type="number" id="room-temp" value="22" min="15" max="35">
+                                <span class="unit">°C</span>
+                            </div>
+                        </div>
+                        
+                        <div class="param-group">
+                            <label for="duration">Duration</label>
+                            <div class="input-group">
+                                <input type="number" id="duration" value="60" min="10" max="120">
+                                <span class="unit">minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculate Button -->
+                <button id="calculate-btn" class="calculate-btn">
+                    <span class="btn-text">Calculate Cooling Curve</span>
+                    <div class="btn-loader"></div>
+                </button>
+
+                <!-- Current Mug Info -->
+                <div class="section mug-info">
+                    <h3>Current Selection</h3>
+                    <div id="selected-mug-info">
+                        <p>Select a mug to see its properties</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Results -->
+            <div class="right-panel">
+                <!-- Chart -->
+                <div class="section chart-section">
+                    <h2>Temperature vs Time</h2>
+                    <div id="temperature-chart"></div>
+                </div>
+
+                <!-- Results -->
+                <div class="section results-section">
+                    <h2>Analysis Results</h2>
+                    <div id="results-content">
+                        <p class="placeholder">Run a calculation to see results</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
