@@ -21,9 +21,16 @@ class CoffeeTracker {
     }
     
     setupEventListeners() {
-        // Mug selection
+        // Mug selection with touch support
         document.querySelectorAll('.mug-option').forEach(option => {
             option.addEventListener('click', (e) => {
+                const mugType = e.currentTarget.dataset.mug;
+                this.selectMug(mugType);
+            });
+            
+            // Prevent double-tap zoom on mobile
+            option.addEventListener('touchend', (e) => {
+                e.preventDefault();
                 const mugType = e.currentTarget.dataset.mug;
                 this.selectMug(mugType);
             });
@@ -240,17 +247,55 @@ class CoffeeTracker {
             }
         ];
         
+        // Mobile-optimized layout
+        const isMobile = window.innerWidth <= 768;
+        
         const layout = {
-            title: 'Coffee Cooling Curve',
-            xaxis: { title: 'Time (minutes)' },
-            yaxis: { title: 'Temperature (°C)' },
+            title: {
+                text: 'Coffee Cooling Curve',
+                font: { size: isMobile ? 14 : 16 }
+            },
+            xaxis: { 
+                title: { 
+                    text: 'Time (minutes)',
+                    font: { size: isMobile ? 12 : 14 }
+                },
+                tickfont: { size: isMobile ? 10 : 12 }
+            },
+            yaxis: { 
+                title: { 
+                    text: 'Temperature (°C)',
+                    font: { size: isMobile ? 12 : 14 }
+                },
+                tickfont: { size: isMobile ? 10 : 12 }
+            },
             paper_bgcolor: 'rgba(245,245,220,0.95)',
             plot_bgcolor: 'rgba(255,255,255,0.9)',
-            font: { color: '#2C1810' },
-            legend: { x: 0.7, y: 0.9 }
+            font: { color: '#2C1810', size: isMobile ? 10 : 12 },
+            legend: { 
+                x: isMobile ? 0.02 : 0.7, 
+                y: isMobile ? 0.98 : 0.9,
+                font: { size: isMobile ? 9 : 11 },
+                bgcolor: 'rgba(255,255,255,0.8)',
+                bordercolor: 'rgba(139,69,19,0.3)',
+                borderwidth: 1
+            },
+            margin: {
+                l: isMobile ? 50 : 60,
+                r: isMobile ? 20 : 40,
+                t: isMobile ? 40 : 50,
+                b: isMobile ? 50 : 60
+            }
         };
         
-        Plotly.newPlot('temperature-chart', traces, layout);
+        const config = {
+            responsive: true,
+            displayModeBar: !isMobile, // Hide toolbar on mobile
+            modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d'],
+            displaylogo: false
+        };
+        
+        Plotly.newPlot('temperature-chart', traces, layout, config);
     }
 }
 

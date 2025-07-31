@@ -653,20 +653,310 @@ body::before {
 
 @media (max-width: 768px) {
     .container {
-        padding: 10px;
+        padding: 15px;
+    }
+    
+    .header {
+        padding: 25px 20px;
+        margin-bottom: 20px;
     }
     
     .header h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        margin-bottom: 8px;
     }
     
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .main-content {
+        gap: 15px;
+    }
+    
+    .left-panel, .right-panel {
+        padding: 20px;
+    }
+    
+    .section {
+        padding: 18px;
+        margin-bottom: 20px;
+    }
+    
+    .section h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
+    /* Mobile-optimized mug selection */
+    .mug-option {
+        flex-direction: row;
+        padding: 15px;
+        align-items: center;
+    }
+    
+    .mug-visual {
+        width: 45px;
+        height: 35px;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+    
+    .mug-info {
+        flex: 1;
+    }
+    
+    .mug-info h3 {
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+    }
+    
+    .mug-desc {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+    
+    .mug-stats {
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start;
+    }
+    
+    .cooling-rate, .thermal-mass {
+        font-size: 0.8rem;
+    }
+    
+    /* Mobile parameters */
+    .param-grid {
+        gap: 18px;
+    }
+    
+    .param-group label {
+        font-size: 1rem;
+        margin-bottom: 6px;
+    }
+    
+    .input-group {
+        padding: 6px;
+    }
+    
+    .input-group input {
+        padding: 12px;
+        font-size: 1rem;
+    }
+    
+    .unit {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+    
+    /* Mobile button */
+    .calculate-btn {
+        padding: 16px;
+        font-size: 1.1rem;
+        margin: 15px 0;
+    }
+    
+    /* Mobile chart */
+    .chart-section {
+        height: 350px;
+    }
+    
+    #temperature-chart {
+        height: 300px;
+        padding: 10px;
+    }
+    
+    /* Mobile results */
+    .results-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .result-item {
+        padding: 15px;
+    }
+    
+    .result-value {
+        font-size: 1.5rem;
+    }
+    
+    .result-label {
+        font-size: 0.85rem;
+    }
+    
+    .timeline-table {
+        font-size: 0.9rem;
+    }
+    
+    .timeline-table th,
+    .timeline-table td {
+        padding: 8px 4px;
+    }
+    
+    .analysis-section, .physics-section {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    
+    .analysis-section h4, .physics-section h4 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header {
+        padding: 20px 15px;
+    }
+    
+    .header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .left-panel, .right-panel {
+        padding: 15px;
+    }
+    
+    .section {
+        padding: 15px;
+    }
+    
+    .section h2 {
+        font-size: 1.2rem;
+    }
+    
+    /* Extra small screen mug options */
     .mug-option {
         flex-direction: column;
         text-align: center;
+        padding: 12px;
     }
     
     .mug-visual {
         margin-right: 0;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
+        width: 40px;
+        height: 30px;
+    }
+    
+    .mug-info h3 {
+        font-size: 1rem;
+    }
+    
+    .mug-desc {
+        font-size: 0.85rem;
+    }
+    
+    .mug-stats {
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 6px;
+    }
+    
+    /* Extra small parameters */
+    .param-group label {
+        font-size: 0.95rem;
+    }
+    
+    .input-group input {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+    
+    .calculate-btn {
+        font-size: 1rem;
+        padding: 14px;
+    }
+    
+    /* Extra small chart */
+    .chart-section {
+        height: 300px;
+    }
+    
+    #temperature-chart {
+        height: 250px;
+        padding: 8px;
+    }
+    
+    /* Extra small results */
+    .result-item {
+        padding: 12px;
+    }
+    
+    .result-value {
+        font-size: 1.3rem;
+    }
+    
+    .timeline-table {
+        font-size: 0.8rem;
+    }
+    
+    .timeline-table th,
+    .timeline-table td {
+        padding: 6px 2px;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+    .mug-option {
+        min-height: 60px;
+    }
+    
+    .calculate-btn {
+        min-height: 50px;
+    }
+    
+    .input-group input {
+        min-height: 44px;
+    }
+    
+    /* Larger touch targets */
+    .mug-option, .calculate-btn {
+        touch-action: manipulation;
+    }
+}
+
+/* Landscape phone optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+    .header {
+        padding: 15px 20px;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .main-content {
+        gap: 15px;
+    }
+    
+    .chart-section {
+        height: 280px;
+    }
+    
+    #temperature-chart {
+        height: 230px;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
     }
 }
